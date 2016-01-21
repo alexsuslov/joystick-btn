@@ -12,7 +12,7 @@ angular.module('widgets',[])
     function pub(){
       if (direction)
         // console.log('current', direction.toString(2) );
-        scope.ngModel.pub(direction);
+        $scope.ngModel.pub(direction);
     }
 
     var t = setInterval(function(){

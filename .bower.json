@@ -1,0 +1,13 @@
+{
+  "name": "joystick-btn",
+  "homepage": "https://github.com/alexsuslov/joystick-btn",
+  "_release": "da2e29d182",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "da2e29d182c7f631d55bc6954c46bca06f39d4a2"
+  },
+  "_source": "https://github.com/alexsuslov/joystick-btn.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/alexsuslov/joystick-btn.git"
+}

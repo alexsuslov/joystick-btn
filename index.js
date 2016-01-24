@@ -1,19 +1,19 @@
 // ## Directive joystick
 // @author Alex Suslov <suslov@me.com>
 'use strict';
+var lamda = function(ng){
+  var Direction = {
+    up    : 0b1000,
+    down  : 0b0100,
+    left  : 0b0010,
+    right : 0b0001
+  }
 
-angular.module('widgets',[])
-.directive('joystickBtn',function( $ionicScrollDelegate ){
-
-  function controller($scope, $element){
+  function controller($scope){
     var direction = 0;
     var force = false;
 
-    function pub(){
-      if (direction)
-        // console.log('current', direction.toString(2) );
-        scope.ngModel.pub(direction);
-    }
+    function pub(){ if (direction) $scope.ngModel.pub(direction.toString()); }
 
     var t = setInterval(function(){
       if(!force) pub();
@@ -21,26 +21,41 @@ angular.module('widgets',[])
     }, 200);
 
     $scope.onRelease = function(name){
-      $ionicScrollDelegate.freezeScroll( false );
-      if (name ==='left') direction = 0b1000 ^ direction;
-      if (name ==='right') direction = 0b0100 ^ direction;
-      if (name ==='up') direction = 0b0010 ^ direction;
-      if (name ==='down') direction = 0b0001 ^ direction;
+      direction = Direction[name] ? Direction[name] ^ direction : 0
     }
 
     $scope.onTouch = function(name){
-      $ionicScrollDelegate.freezeScroll( true );
-      if (name ==='left') direction = 0b1000 | direction;
-      if (name ==='right') direction = 0b0100 | direction;
-      if (name ==='up') direction = 0b0010 | direction;
-      if (name ==='down') direction = 0b0001 | direction;
+      direction = (Direction[name] ? Direction[name] | direction : 0)
       pub();
       force = true;
     }
   }
-  return {
-    scope:{ngModel:"="},
-    controller: controller,
-    templateUrl:'/lib/joystick-btn/joystick-btn.svg'
-  }
-})
+
+  ng.module( 'widgets', [])
+  .directive( 'joystickBtn4', function( ){
+    return {
+      scope:{ngModel:"="},
+      controller: controller,
+      templateUrl:'/lib/joystick-btn/joystick_btn4.svg'
+    }
+  })
+  .directive( 'joystickBtn2', function(  ){
+    return {
+      scope:{ngModel:"="},
+      controller: controller,
+      templateUrl:'/lib/joystick-btn/joystick_btn2.svg'
+    }
+  })
+  .directive( 'joystickBtn2_', function(  ){
+    return {
+      scope:{ngModel:"="},
+      controller: controller,
+      templateUrl:'/lib/joystick-btn/joystick_btn2_.svg'
+    }
+  })
+}
+lamda(angular);
+
+
+
+

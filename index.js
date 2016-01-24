@@ -75,6 +75,3 @@ var lamda = function(ng){
 }
 lamda(angular);
 
-
-
-

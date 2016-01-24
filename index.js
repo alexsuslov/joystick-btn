@@ -2,6 +2,12 @@
 // @author Alex Suslov <suslov@me.com>
 'use strict';
 var lamda = function(ng){
+  var btnCss = [
+   'padding: 3px 7px;',
+   'color: {{btn.right}};',
+   'background:: {{fill.right}};'
+  ].join(' ');
+
   var Direction = {
     up    : 0b1000,
     down  : 0b0100,
@@ -27,6 +33,7 @@ var lamda = function(ng){
       left  : config.arrow,
       right : config.arrow
     };
+    $scope.title = config.title;
 
     function pub(){ if (direction) $scope.ngModel.pub(direction.toString()); }
 
@@ -70,6 +77,13 @@ var lamda = function(ng){
       scope:{ngModel:"="},
       controller: controller,
       templateUrl:'/lib/joystick-btn/joystick_btn2_.svg'
+    }
+  })
+  .directive( 'simpleBtn', function(  ){
+    return {
+      scope:{ngModel:"="},
+      controller: controller,
+      template:'<button style="' + btnCss + '">{{title}}</button>'
     }
   })
 }

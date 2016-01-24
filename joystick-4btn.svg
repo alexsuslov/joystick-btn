@@ -13,7 +13,7 @@
           on-release="onRelease('up')"
           transform="translate(143 8)">
             <rect stroke="url(#a)" stroke-width="2" width="128" height="93" rx="8" />
-            <path stroke="#4990E2" stroke-width="5" d="M64 38l9 17H55z" />
+            <path ng-stroke="btn.up" stroke-width="5" d="M64 38l9 17H55z" />
         </g>
         <g
           fill='#DDE1DD'

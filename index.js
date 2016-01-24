@@ -9,23 +9,42 @@ var lamda = function(ng){
     right : 0b0001
   }
 
-  function controller($scope){
+  function controller($scope, $element){
     var direction = 0;
     var force = false;
+    var config = $scope.ngModel.widgetConfig;
+
+    $scope.fill = {
+      up    : config.fill,
+      down  : config.fill,
+      left  : config.fill,
+      right : config.fill
+    };
+
+    $scope.btn = {
+      up    : config.arrow,
+      down  : config.arrow,
+      left  : config.arrow,
+      right : config.arrow
+    };
 
     function pub(){ if (direction) $scope.ngModel.pub(direction.toString()); }
 
     var t = setInterval(function(){
       if(!force) pub();
       else force = false;
-    }, 200);
+    }, config.delay);
 
     $scope.onRelease = function(name){
+      $scope.btn[name] = config.arrow;
+      $scope.fill[name] = config.fill;
       direction = Direction[name] ? Direction[name] ^ direction : 0
     }
 
     $scope.onTouch = function(name){
-      direction = (Direction[name] ? Direction[name] | direction : 0)
+      $scope.btn[name] = config.arrowPressed;
+      $scope.fill[name] = config.fillPressed;
+      direction = Direction[name] ? Direction[name] | direction : 0
       pub();
       force = true;
     }
